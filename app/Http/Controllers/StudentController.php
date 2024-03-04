@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -57,9 +57,16 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit(string $id)
     {
-        //
+        $student = Student::where(['nim' => $id]);
+        if ($student->count() < 1) {
+            return redirect('/student')->with([
+                'notifikasi' => 'Data siswa tidak ditemukan !',
+                'type' => 'danger'
+        ]);
+        }
+return view('student.edit', ['student' => $student->first()]);
     }
 
     /**
