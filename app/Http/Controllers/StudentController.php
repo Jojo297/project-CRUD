@@ -24,7 +24,7 @@ class StudentController extends Controller
      *
     
      */
-    public function create()
+    public function create(Student $student)
     {
         return view('student.create');
     }
@@ -144,8 +144,21 @@ return view('student.edit', ['student' => $student->first()]);
      *
     
      */
-    public function destroy(Student $student)
+    public function destroy(string $id)
     {
-        //
+        $student = Student::where('nim', $id);
+
+        if ($student->first()->delete()) {
+            
+            return redirect('/student')->with([
+                'notifikasi'=> 'Data Berhasil dihapus !',
+                'type'=> 'success',
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'notifikasi'=> 'Data gagal dihapus !',
+                'type'=> 'error',
+            ]);
+        }
     }
 }

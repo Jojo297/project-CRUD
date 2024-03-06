@@ -24,7 +24,7 @@ Route::get('/student', [StudentController::class, 'index'])
 Route::get('/student/add', [StudentController::class, 'create'])
     ->name('student.create');
 
-Route::get('/student/add', [StudentController::class, 'store'])
+Route::post('/student/add', [StudentController::class, 'store'])
     ->name('student.store');
 
 Route::get('/student/edit/{id}', [StudentController::class, 'edit'])
@@ -32,3 +32,6 @@ Route::get('/student/edit/{id}', [StudentController::class, 'edit'])
 
 Route::put('/student/edit/{id}', [StudentController::class, 'update'])
     ->name('student.update');
+
+Route::delete('/student/delete/{id}', [StudentController::class, 'destroy'])
+    ->name('student.destroy');
